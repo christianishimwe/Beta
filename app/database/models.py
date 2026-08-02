@@ -22,3 +22,19 @@ class apis(SQLModel, table=True):
             default=datetime.now,
         )
     )
+
+
+class urls(SQLModel, table=True):
+    __tablename__ = "urls"
+    url: str = Field(
+        primary_key=True
+    )
+    api_id: UUID = Field(
+        foreign_key="users.id",
+    )
+    created_at: datetime = Field(
+        sa_column=Column(
+            postgresql.TIMESTAMP,
+            default=datetime.now
+        )
+    )
