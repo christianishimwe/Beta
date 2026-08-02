@@ -61,3 +61,26 @@ class monitors(SQLModel, table=True):
             default=datetime.now
         )
     )
+
+
+class pings(SQLModel, table=True):
+    __tablename__ = "pings"
+    id: UUID = Field(
+        sa_column=Column(
+            postgresql.UUID,
+            default=uuid4,
+            primary_key=True
+        )
+    )
+    monitor_id: UUID = Field(
+        foreign_key="monitors.id"
+    )
+    status_code: int
+    response_time: float
+    is_up: bool
+    created_at: datetime = Field(
+        sa_column=Column(
+            postgresql.TIMESTAMP,
+            default=datetime.now
+        )
+    )
