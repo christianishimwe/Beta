@@ -1,6 +1,7 @@
 from datetime import datetime
 from uuid import UUID, uuid4
 
+from httpx import post
 from sqlalchemy import Column
 from sqlmodel import Field, SQLModel
 from sqlalchemy.dialects import postgresql
@@ -32,6 +33,28 @@ class urls(SQLModel, table=True):
     api_id: UUID = Field(
         foreign_key="users.id",
     )
+    created_at: datetime = Field(
+        sa_column=Column(
+            postgresql.TIMESTAMP,
+            default=datetime.now
+        )
+    )
+
+
+class monitors(SQLModel, table=True):
+    __tablename__ = "monitors"
+    id: UUID = Field(
+        sa_column=Column(
+            postgresql.UUID,
+            default=uuid4,
+            primary_key=True
+        )
+    )
+    url_id: str = Field(
+        foreign_key="urls.url"
+    )
+    interval: float
+    is_active: bool
     created_at: datetime = Field(
         sa_column=Column(
             postgresql.TIMESTAMP,
