@@ -8,7 +8,7 @@ from sqlalchemy.dialects import postgresql
 
 
 class Apis(SQLModel, table=True):
-    __tablename__ = "users"
+    __tablename__ = "apis"
     id: UUID = Field(
         sa_column=Column(
             postgresql.UUID,
@@ -31,7 +31,7 @@ class Urls(SQLModel, table=True):
         primary_key=True
     )
     api_id: UUID = Field(
-        foreign_key="users.id",
+        foreign_key="apis.id",
     )
     created_at: datetime = Field(
         sa_column=Column(
