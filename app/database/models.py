@@ -7,7 +7,7 @@ from sqlmodel import Field, SQLModel
 from sqlalchemy.dialects import postgresql
 
 
-class apis(SQLModel, table=True):
+class Apis(SQLModel, table=True):
     __tablename__ = "users"
     id: UUID = Field(
         sa_column=Column(
@@ -25,7 +25,7 @@ class apis(SQLModel, table=True):
     )
 
 
-class urls(SQLModel, table=True):
+class Urls(SQLModel, table=True):
     __tablename__ = "urls"
     url: str = Field(
         primary_key=True
@@ -41,7 +41,7 @@ class urls(SQLModel, table=True):
     )
 
 
-class monitors(SQLModel, table=True):
+class Monitors(SQLModel, table=True):
     __tablename__ = "monitors"
     id: UUID = Field(
         sa_column=Column(
@@ -63,7 +63,7 @@ class monitors(SQLModel, table=True):
     )
 
 
-class pings(SQLModel, table=True):
+class Pings(SQLModel, table=True):
     __tablename__ = "pings"
     id: UUID = Field(
         sa_column=Column(
