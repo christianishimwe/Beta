@@ -11,7 +11,7 @@ class apis(SQLModel, table=True):
     __tablename__ = "users"
     id: UUID = Field(
         sa_column=Column(
-            type=postgresql.UUID,
+            postgresql.UUID,
             default=uuid4,
             primary_key=True,
         )
