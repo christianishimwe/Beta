@@ -61,6 +61,12 @@ class Monitors(SQLModel, table=True):
             default=datetime.now
         )
     )
+    last_pinged_at: datetime = Field(
+        sa_column=Column(
+            postgresql.TIMESTAMP,
+            default=datetime.now
+        )
+    )
 
 
 class Pings(SQLModel, table=True):
