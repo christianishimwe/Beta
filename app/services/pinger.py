@@ -28,9 +28,10 @@ async def ping(url: str):
 
 async def get_due_monitors(session: AsyncSession):
     # get all monitors that are active and due for a ping
+    utc_now = func.timezone("UTC", func.now())
     query = select(Monitors).where(
         col(Monitors.is_active).is_(True),
-        func.extract("epoch", func.now() -
+        func.extract("epoch", utc_now -
                      col(Monitors.last_pinged_at)) >= Monitors.interval
     )
 

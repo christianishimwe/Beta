@@ -20,7 +20,7 @@ class Apis(SQLModel, table=True):
     created_at: datetime = Field(
         sa_column=Column(
             postgresql.TIMESTAMP,
-            default=datetime.now,
+            default=datetime.utcnow,
         )
     )
 
@@ -36,7 +36,7 @@ class Urls(SQLModel, table=True):
     created_at: datetime = Field(
         sa_column=Column(
             postgresql.TIMESTAMP,
-            default=datetime.now
+            default=datetime.utcnow
         )
     )
 
@@ -58,13 +58,13 @@ class Monitors(SQLModel, table=True):
     created_at: datetime = Field(
         sa_column=Column(
             postgresql.TIMESTAMP,
-            default=datetime.now
+            default=datetime.utcnow
         )
     )
     last_pinged_at: datetime = Field(
         sa_column=Column(
             postgresql.TIMESTAMP,
-            default=datetime.now
+            default=datetime.utcnow
         )
     )
 
@@ -87,6 +87,6 @@ class Pings(SQLModel, table=True):
     created_at: datetime = Field(
         sa_column=Column(
             postgresql.TIMESTAMP,
-            default=datetime.now
+            default=datetime.utcnow
         )
     )

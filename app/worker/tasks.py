@@ -1,4 +1,5 @@
 import asyncio
+from datetime import datetime
 from celery import Celery
 from app.config import redis_settings
 from app.database.session import async_session
@@ -23,6 +24,12 @@ async def _ping_due_monitors():
         results = await asyncio.gather(
             *(ping(monitor.url_id) for monitor in due_monitors)
         )
+
+        for monitor in due_monitors:
+            monitor.last_pinged_at = datetime.utcnow()
+
+        await session.commit()
+
         return list(zip(due_monitors, results))
 
 
