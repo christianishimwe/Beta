@@ -5,3 +5,7 @@ from pydantic import BaseModel
 class BaseUrl(BaseModel):
     url: str
     api_id: UUID
+
+
+class UrlCreate(BaseUrl):
+    pass

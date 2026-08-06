@@ -5,3 +5,7 @@ class BaseMonitor(BaseModel):
     url_id: str
     interval: float
     is_active: bool
+
+
+class MonitorCreate(BaseMonitor):
+    pass
