@@ -2,7 +2,7 @@ import asyncio
 from datetime import datetime
 from celery import Celery
 from app.config import redis_settings
-from app.database.session import async_session
+from app.database.session import async_session, engine
 from app.services.pinger import ping, get_due_monitors
 
 app = Celery(
@@ -30,7 +30,13 @@ async def _ping_due_monitors():
 
         await session.commit()
 
-        return list(zip(due_monitors, results))
+    # asyncio.run() below opens a fresh event loop per task invocation,
+    # so the pooled connections from this loop must be released before
+    # the loop closes, otherwise the next invocation reuses connections
+    # bound to a dead loop and asyncpg raises interface errors.
+    await engine.dispose()
+
+    return list(zip(due_monitors, results))
 
 
 @app.task(name="app.worker.tasks.run_pings")

@@ -3,3 +3,5 @@ venv
 .vscode
 .mypy_cache
 **__pycache__/
+dump.rdb
+celerybeat-schedule*
